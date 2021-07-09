@@ -789,3 +789,20 @@ Cac san pham co nhung cai tags:
     + tag - product: n-n relationship
 
 Lay ra danh sach san pham va tags cua no
+
+Quan he 1-n:
+    + xoa category(la thang 1): $category->products->delete()
+    + associate()
+    + disassociate()
+Voi quan he nhieu nhieu
+    + thi k the goi nhu tren VD: $tag->products->delete()
+    + xoa tag:
+        + bo lien ket: $tag->products()->detach($product_id);
+    + Them 1 san pham vao 1 tag:
+        + $tag->products()->attach($product_id)
+
+Toggle:
+    + Neu san pham co tag => xoa tag di
+    + Neu san pham ko co tag => them tag do vao
+
+    $product->tags()->toggle([mang cac id tags])

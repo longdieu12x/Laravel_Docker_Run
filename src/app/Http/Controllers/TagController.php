@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use Illuminate\Http\Request;
-use App\Product;
-class ProductController extends Controller
+use App\Tag;
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,29 +14,8 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $categories = Category::all();
-        return view('product.list')->with('categories',$categories);
     }
-    public function getByAjax(Request $request){
-        // $productQuery = Product::query();
-        // if ($request->categories){
-        //     $productQuery->whereIn('category_id', $request->categories);
-        // }
-        // $products = $productQuery->get();
-        $productQuery = Product::query();
-        if ($request->categories){
-            $productQuery->category($request->categories);
-        }
-        $products = $productQuery
-                        ->with([
-                            'tags' => function($tagQuery){
-                                return $tagQuery->isActive();
-                            }
-                            ])
-                        ->with('category')
-                        ->get();
-        return response()->json($products);
-    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -99,7 +77,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tag $tag)
     {
         //
     }
