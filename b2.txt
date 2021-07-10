@@ -793,7 +793,21 @@ Lay ra danh sach san pham va tags cua no
 Quan he 1-n:
     + xoa category(la thang 1): $category->products->delete()
     + associate()
-    + disassociate()
+    + dissociate()
+    Vi du:
+        - Co 1 san pham => them san pham nay vao category A
+            thong thuong ta co the lam:
+                $product->update(['category_id', $category->id])
+            nhung ma nen lam nhu sau:
+                $product->associate($category)
+
+        - di chuyen cac san pham tu categoryA nay sang categoryB khac:
+            $categoryA->products()->associate($categoryB)
+
+        - Co 1 san pham -> xoa lien ket den category A hien tai
+            $product->category()->dissociate()
+        - Xoa category cua san pham:
+            $category->products()->dissociate($product_id)
 Voi quan he nhieu nhieu
     + thi k the goi nhu tren VD: $tag->products->delete()
     + xoa tag:
@@ -806,3 +820,15 @@ Toggle:
     + Neu san pham ko co tag => them tag do vao
 
     $product->tags()->toggle([mang cac id tags])
+
+Git: 
+    - Git flow:
+
+Git: phan mem de quan ly phien ban code
+    - Lam viec nhom
+Git server: server cai git (vi du: github, gitlab, bitbucket)
+Github:
+    + repo: repository
+        + la mot kho
+    + clone ve may
+        + sao chep 1 repo ve may
